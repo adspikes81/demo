@@ -1,0 +1,96 @@
+﻿@page "/component"
+
+@inherits TestBase
+
+<h3>Component</h3>
+<br />
+<p>
+    Tract ID: @Tract.TractId
+
+    <label>
+        <input type="checkbox"
+               @bind-value="Tract.isActive" />
+        &nbsp; Is Active
+    </label>
+    <br />
+    Is Active: @Tract.isActive
+    <br />
+    Location: @Tract.Location
+</p>
+
+<p>
+    Total Acreage: @Tract.TotalAcreage.ToString()
+
+    Total Acreage: @Tract.TotalAcreage.ToString("c")
+</p>
+
+
+<p>
+    <input type="number"
+           @bind-value="Tract.TotalAcreage"
+           @bind-value:event="oninput" />
+
+</p>
+
+<p>
+    <label>
+        <input type="radio"
+               value="1"
+               name="group"
+               checked="@(selectedGroup == 1)"
+               @onclick="()=>selectedGroup = 1" />1
+    </label>
+    <br />
+    @selectedGroup
+</p>
+
+<p>
+    <select @bind="selectedLeaseId">
+        @foreach (var item in Tract.Leases)
+        {
+            <option value="@item.TractId">@item.LeaseId</option>
+        }
+    </select>
+    <br />
+    @selectedLeaseId
+</p>
+
+<p>
+    <ul>
+        @foreach (var item in Tract.Leases)
+        {
+            <li>@item.LeaseId, @item.TractId</li>
+        }
+    </ul>
+</p>
+
+<p>
+    <table class="table">
+        @foreach (var item in Tract.Leases)
+        {
+            <tr>
+                <td>@item.TractLeaseConnectionId</td>
+                <td>@item.TractId</td>
+                <td>@item.LeaseId</td>
+                <td>@item.Location</td>
+                <td>
+                    <input type="text"
+                           @bind-value="@item.TractId"
+                           @bind-value:event="oninput" />
+                </td>
+                <td>
+                    <input type="text"
+                           class="form-control"
+                           @bind-value="@item.LeaseId"
+                           @bind-value:event="oninput" />
+                </td>
+            </tr>
+        }
+    </table>
+</p>
+
+
+@code {
+
+
+}
